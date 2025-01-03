@@ -5,7 +5,7 @@ Experiments and notes I made while reading ["Learning Go"][book] book by Jon Bod
 ## TOC
 
 - [x] Chapter 1: Setting Up Your Go Environment
-- [ ] Chapter 2: Predeclared Types and Declarations
+- [x] Chapter 2: Predeclared Types and Declarations
 - [ ] Chapter 3: Composite Types
 - [ ] Chapter 4: Blocks, Shadows, and Control Statements
 - [ ] Chapter 5: Functions
