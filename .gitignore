@@ -1,2 +1,5 @@
-# GoLand
+# goland
 .idea/
+
+# vim
+*.swp
