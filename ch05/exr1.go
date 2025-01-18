@@ -1,9 +1,9 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
-	"errors"
 )
 
 func add(i int, j int) (int, error) { return i + j, nil }
@@ -19,7 +19,7 @@ func div(i int, j int) (int, error) {
 	return i / j, nil
 }
 
-var opMap = map[string]func(int, int) (int, error) {
+var opMap = map[string]func(int, int) (int, error){
 	"+": add,
 	"-": sub,
 	"*": mul,
