@@ -10,7 +10,7 @@ func prefixer(prefix string) func(string) string {
 
 func main() {
 	helloPrefix := prefixer("Hello")
-	
+
 	fmt.Println(helloPrefix("Bob"))
 	fmt.Println(helloPrefix("Alice"))
 }
