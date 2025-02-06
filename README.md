@@ -9,7 +9,7 @@ Experiments and notes I made while reading ["Learning Go"][book] book by Jon Bod
 - [x] Chapter 3: Composite Types
 - [x] Chapter 4: Blocks, Shadows, and Control Statements
 - [x] Chapter 5: Functions
-- [ ] Chapter 6: Pointers
+- [x] Chapter 6: Pointers
 - [ ] Chapter 7: Types, Methods, and Interfaces
 - [ ] Chapter 8: Generics
 - [ ] Chapter 9: Errors
