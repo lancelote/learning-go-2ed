@@ -11,7 +11,7 @@ Experiments and notes I made while reading ["Learning Go"][book] book by Jon Bod
 - [x] Chapter 5: Functions
 - [x] Chapter 6: Pointers
 - [x] Chapter 7: Types, Methods, and Interfaces
-- [ ] Chapter 8: Generics
+- [x] Chapter 8: Generics
 - [ ] Chapter 9: Errors
 - [ ] Chapter 10: Modules, Packages, and Imports
 - [ ] Chapter 11: Go Tooling
