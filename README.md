@@ -13,7 +13,7 @@ Experiments and notes I made while reading ["Learning Go"][book] book by Jon Bod
 - [x] Chapter 7: Types, Methods, and Interfaces
 - [x] Chapter 8: Generics
 - [x] Chapter 9: Errors
-- [ ] Chapter 10: Modules, Packages, and Imports
+- [x] Chapter 10: Modules, Packages, and Imports
 - [ ] Chapter 11: Go Tooling
 - [ ] Chapter 12: Concurrency in Go
 - [ ] Chapter 13: The Standard Library
