@@ -1,0 +1,22 @@
+name: "lint"
+on: ["push", "pull_request"]
+
+jobs:
+  lint:
+    name: "lint"
+    runs-on: ubuntu-latest
+    steps:
+    - name: "checkout"
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+    - name: "setup Golang"
+      uses: actions/setup-go@v5
+    - name: "staticcheck"
+      uses: dominikh/staticcheck-action@v1
+      with:
+        version: "latest"
+    - name: "revive"
+      uses: docker://morphy/revive-action:v2
+    - name: "golangci-lint"
+      uses: golangci/golangci-lint-action@v8
