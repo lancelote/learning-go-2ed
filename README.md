@@ -14,7 +14,7 @@ Experiments and notes I made while reading ["Learning Go"][book] book by Jon Bod
 - [x] Chapter 8: Generics
 - [x] Chapter 9: Errors
 - [x] Chapter 10: Modules, Packages, and Imports
-- [ ] Chapter 11: Go Tooling
+- [x] Chapter 11: Go Tooling
 - [ ] Chapter 12: Concurrency in Go
 - [ ] Chapter 13: The Standard Library
 - [ ] Chapter 14: The Context
