@@ -16,7 +16,7 @@ Experiments and notes I made while reading ["Learning Go"][book] book by Jon Bod
 - [x] Chapter 10: Modules, Packages, and Imports
 - [x] Chapter 11: Go Tooling
 - [x] Chapter 12: Concurrency in Go
-- [ ] Chapter 13: The Standard Library
+- [x] Chapter 13: The Standard Library
 - [ ] Chapter 14: The Context
 - [ ] Chapter 15: Writing Tests
 - [ ] Chapter 16: Here Be Dragons: Reflect, Unsafe, and Cgo
