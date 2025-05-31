@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := vet
-.PHONY:fmt vet lint
+.PHONY:fmt vet lint test
 
 fmt:
 	go fmt ./...
@@ -12,3 +12,6 @@ lint:
 	revive
 	staticcheck ./...
 	go vet ./...
+
+test:
+	go test ./...
