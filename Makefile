@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := vet
-.PHONY:fmt vet lint test
+.PHONY:fmt vet lint test cov
 
 fmt:
 	go fmt ./...
@@ -15,3 +15,7 @@ lint:
 
 test:
 	go test ./...
+
+cov:
+	go test -v -cover -coverprofile=c.out ./...
+	go tool cover -html=c.out
