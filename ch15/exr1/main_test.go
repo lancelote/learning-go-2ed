@@ -6,10 +6,29 @@ import (
 )
 
 func TestParser(t *testing.T) {
-	expected := Input{Id: "CALC_1", Op: "+", Val1: 3, Val2: 2}
-	result, _ := parser([]byte("CALC_1\n+\n3\n2"))
+	data := []struct {
+		name     string
+		input    []byte
+		expected Input
+	}{
+		{
+			"basic summation",
+			[]byte("CALC_1\n+\n3\n2"),
+			Input{Id: "CALC_1", Op: "+", Val1: 3, Val2: 2},
+		},
+		{
+			"basic multiplication",
+			[]byte("CALC_2\n*\n100\n3000"),
+			Input{Id: "CALC_2", Op: "*", Val1: 100, Val2: 3000},
+		},
+	}
 
-	if diff := cmp.Diff(expected, result); diff != "" {
-		t.Error(diff)
+	for _, d := range data {
+		t.Run(d.name, func(t *testing.T) {
+			result, _ := parser(d.input)
+			if diff := cmp.Diff(d.expected, result); diff != "" {
+				t.Error(diff)
+			}
+		})
 	}
 }
