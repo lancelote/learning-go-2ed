@@ -13,4 +13,4 @@ jobs:
     - name: "setup Golang"
       uses: actions/setup-go@v5
     - name: "run tests"
-      uses: make test
+      run: make test
