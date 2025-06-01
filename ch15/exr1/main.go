@@ -77,7 +77,7 @@ func WriteData(in <-chan Result, w io.Writer) {
 	for r := range in {
 		// write the output data to writer
 		// each line is id:result
-		w.Write([]byte(fmt.Sprintf("%s:%d\n", r.Id, r.Value)))
+		fmt.Fprintf(w, "%s:%d\n", r.Id, r.Value)
 	}
 }
 
