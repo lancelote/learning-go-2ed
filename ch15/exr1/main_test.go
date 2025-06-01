@@ -52,3 +52,28 @@ func TestParser(t *testing.T) {
 		})
 	}
 }
+
+func TestDataProcessor(t *testing.T) {
+	in := make(chan []byte)
+	out := make(chan Result)
+
+	go DataProcessor(in, out)
+
+	data := []byte("CALC_5\n*\n2\n5")
+	in <- data
+	close(in)
+
+	result, ok := <-out
+	if !ok {
+		t.Fatal("output channel was closed unexpectedly")
+	}
+
+	expected := Result{
+		Id:    "CALC_5",
+		Value: 10,
+	}
+
+	if diff := cmp.Diff(expected, result); diff != "" {
+		t.Error(diff)
+	}
+}
