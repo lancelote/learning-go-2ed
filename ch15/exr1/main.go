@@ -58,6 +58,9 @@ func DataProcessor(in <-chan []byte, out chan<- Result) {
 		case "*":
 			calc = input.Val1 * input.Val2
 		case "/":
+			if input.Val2 == 0 {
+				continue
+			}
 			calc = input.Val1 / input.Val2
 		default:
 			continue

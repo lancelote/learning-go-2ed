@@ -59,27 +59,63 @@ func TestParser(t *testing.T) {
 }
 
 func TestDataProcessor(t *testing.T) {
-	in := make(chan []byte)
-	out := make(chan Result)
-
-	go DataProcessor(in, out)
-
-	data := []byte("CALC_5\n*\n2\n5")
-	in <- data
-	close(in)
-
-	result, ok := <-out
-	if !ok {
-		t.Fatal("output channel was closed unexpectedly")
+	data := []struct {
+		name     string
+		input    []byte
+		expected *Result
+	}{
+		{
+			"basic multiplication",
+			[]byte("CALC_5\n*\n2\n5"),
+			&Result{
+				Id:    "CALC_5",
+				Value: 10,
+			},
+		},
+		{
+			"basic summation",
+			[]byte("CALC_6\n+\n1\n2"),
+			&Result{
+				Id:    "CALC_6",
+				Value: 3,
+			},
+		},
+		{
+			"basic substraction",
+			[]byte("CALC_7\n-\n3\n1"),
+			&Result{
+				Id:    "CALC_7",
+				Value: 2,
+			},
+		},
+		{
+			"zero division",
+			[]byte("CALC_8\n/\n5\n0"),
+			nil,
+		},
 	}
 
-	expected := Result{
-		Id:    "CALC_5",
-		Value: 10,
-	}
+	for _, d := range data {
+		t.Run(d.name, func(t *testing.T) {
+			in := make(chan []byte)
+			out := make(chan Result)
 
-	if diff := cmp.Diff(expected, result); diff != "" {
-		t.Error(diff)
+			go DataProcessor(in, out)
+
+			in <- d.input
+			close(in)
+
+			result, ok := <-out
+			if !ok && d.expected != nil {
+				t.Fatal("output channel was closed unexpectedly")
+			}
+
+			if d.expected == nil {
+				return
+			} else if diff := cmp.Diff(*d.expected, result); diff != "" {
+				t.Error(diff)
+			}
+		})
 	}
 }
 
