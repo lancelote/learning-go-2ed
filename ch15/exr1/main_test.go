@@ -1,9 +1,14 @@
 package main
 
 import (
+	"bytes"
 	"errors"
 	"github.com/google/go-cmp/cmp"
+	"net/http"
+	"net/http/httptest"
 	"strconv"
+	"strings"
+	"sync"
 	"testing"
 )
 
@@ -75,5 +80,56 @@ func TestDataProcessor(t *testing.T) {
 
 	if diff := cmp.Diff(expected, result); diff != "" {
 		t.Error(diff)
+	}
+}
+
+type notifyingWriter struct {
+	buf *bytes.Buffer
+	wg  *sync.WaitGroup
+}
+
+func (w *notifyingWriter) Write(p []byte) (int, error) {
+	defer w.wg.Done()
+	return w.buf.Write(p)
+}
+
+func TestIntegration(t *testing.T) {
+	ch1 := make(chan []byte)
+	ch2 := make(chan Result)
+
+	var buf bytes.Buffer
+	var wg sync.WaitGroup
+	wg.Add(1)
+
+	writer := &notifyingWriter{buf: &buf, wg: &wg}
+
+	go DataProcessor(ch1, ch2)
+	go WriteData(ch2, writer)
+
+	ts := httptest.NewServer(NewController(ch1))
+	defer ts.Close()
+
+	body := `CALC_6
+/
+10
+5`
+
+	resp, err := http.Post(ts.URL, "text/plain", strings.NewReader(body))
+	if err != nil {
+		t.Fatalf("http post failed: %v", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusAccepted {
+		t.Fatalf("unexpected status: %d", resp.StatusCode)
+	}
+
+	wg.Wait()
+
+	got := buf.String()
+	expected := "CALC_6:2\n"
+
+	if got != expected {
+		t.Errorf("was expecting `%s` got `%s`", expected, got)
 	}
 }
