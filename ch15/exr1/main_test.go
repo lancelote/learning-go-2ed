@@ -98,6 +98,11 @@ func TestDataProcessor(t *testing.T) {
 			[]byte("foobar"),
 			nil,
 		},
+		{
+			"unsupported operator",
+			[]byte("CALC_9\n^\n2\n3"),
+			nil,
+		},
 	}
 
 	for _, d := range data {
