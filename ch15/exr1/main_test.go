@@ -93,6 +93,11 @@ func TestDataProcessor(t *testing.T) {
 			[]byte("CALC_8\n/\n5\n0"),
 			nil,
 		},
+		{
+			"bad input",
+			[]byte("foobar"),
+			nil,
+		},
 	}
 
 	for _, d := range data {
